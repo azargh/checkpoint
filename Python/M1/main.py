@@ -3,10 +3,10 @@ from flask import Flask, request
 from datetime import datetime
 
 
-sqs = boto3.client('sqs')
+sqs = boto3.client('sqs', region_name='us-east-1')
 sqsurl = sqs.get_queue_url(QueueName='CheckPointSQS')['QueueUrl']
 app = Flask(__name__)
-token = boto3.client('ssm').get_parameter(Name='token')['Parameter']['Value']
+token = boto3.client('ssm', region_name='us-east-1').get_parameter(Name='token')['Parameter']['Value']
 
 
 def _update_token():
