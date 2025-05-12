@@ -46,3 +46,14 @@
 /Terraform/SecurityGroup/terraform.tfstate
 /Terraform/SQS/terraform.tfstate
 /Terraform/s3-new-name/terraform.tfstate.backup
+/Terraform/terraform.tfstate
+/Terraform/.terraform/
+/Terraform/.terraform.lock.hcl
+/Terraform/terraform.tfstate
+/Terraform/terraform.tfstate.backup
+/Terraform/terraform.tfstate.backup
+/Terraform/.terraform.lock.hcl
+/Terraform/.terraform/
+/Terraform/terraform.tfstate
+/Terraform/checkpoint-key
+/Terraform/checkpoint-key.pub
