@@ -6,9 +6,9 @@ import os
 from datetime import datetime
 
 
-sqs = boto3.client('sqs')
+sqs = boto3.client('sqs', region_name='us-east-1')
 sqsurl = sqs.get_queue_url(QueueName='CheckPointSQS')['QueueUrl']
-s3 = boto3.client('s3')
+s3 = boto3.client('s3', region_name='us-east-1')
 
 
 def receive_and_upload_messages():
