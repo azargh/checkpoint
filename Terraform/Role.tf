@@ -40,7 +40,3 @@ resource "aws_iam_role_policy" "ec2-s3-role-policy" {
 }
 EOF
 }
-
-output "role" {
-  value = aws_iam_instance_profile.ec2-s3-instance-profile.name
-}
