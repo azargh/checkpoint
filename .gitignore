@@ -1,0 +1,48 @@
+/Terraform/Jenkins instance/.terraform.lock.hcl
+/Terraform/Keypair/.terraform.lock.hcl
+/Terraform/MC1/.terraform.lock.hcl
+/Terraform/MC2/.terraform.lock.hcl
+/Terraform/S3/.terraform.lock.hcl
+/Terraform/s3-new-name/.terraform.lock.hcl
+/Terraform/Secret-Token/.terraform.lock.hcl
+/Terraform/SecurityGroup/.terraform.lock.hcl
+/Terraform/SQS/.terraform.lock.hcl
+/Terraform/checkpoint-key.pub
+/Terraform/checkpoint-key
+/.idea/CheckPoint.iml
+/.idea/.gitignore
+/Terraform/Jenkins instance/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/SQS/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/SecurityGroup/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/Secret-Token/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/S3/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/s3-new-name/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/MC2/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/MC1/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/Terraform/Keypair/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/LICENSE.txt
+/.idea/misc.xml
+/.idea/modules.xml
+/Python/Pipfile
+/Python/Pipfile.lock
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/Terraform/Jenkins instance/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/SQS/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/SecurityGroup/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/s3-new-name/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/Secret-Token/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/S3/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/MC2/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/MC1/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/Terraform/Keypair/.terraform/providers/registry.terraform.io/hashicorp/aws/5.97.0/windows_amd64/terraform-provider-aws_v5.97.0_x5.exe
+/.idea/vcs.xml
+/Terraform/Jenkins instance/terraform.tfstate
+/Terraform/Keypair/terraform.tfstate
+/Terraform/MC1/terraform.tfstate
+/Terraform/MC2/terraform.tfstate
+/Terraform/S3/terraform.tfstate
+/Terraform/s3-new-name/terraform.tfstate
+/Terraform/Secret-Token/terraform.tfstate
+/Terraform/SecurityGroup/terraform.tfstate
+/Terraform/SQS/terraform.tfstate
+/Terraform/s3-new-name/terraform.tfstate.backup
