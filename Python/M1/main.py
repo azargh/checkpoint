@@ -29,6 +29,10 @@ def _forward(x: dict) -> None:
     return sqs.send_message(QueueUrl=sqsurl, DelaySeconds=10, MessageBody='hello')
 
 
+@app.route('/', methods=['GET'])
+def handle():
+    return {'a': 'b'}
+
 @app.route('/', methods=['POST'])
 def handle():
     json = request.get_json()
