@@ -4,7 +4,6 @@ resource "aws_lb" "CheckPoint-lb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.checkpoint-lb-sg.id]
   subnets            = [aws_default_subnet.subnet-us-east-1a.id, aws_default_subnet.subnet-us-east-1b.id, aws_default_subnet.subnet-us-east-1c.id]
-  enable_deletion_protection = true
 }
 
 resource "aws_default_subnet" "subnet-us-east-1a" {
@@ -21,7 +20,7 @@ resource "aws_default_subnet" "subnet-us-east-1c" {
 
 resource "aws_lb_target_group" "CheckPoint-target-group" {
   name = "CheckPoint-target-group"
-  port = "5000"
+  port = "80"
   protocol = "HTTP"
   target_type = "instance"
   vpc_id   = aws_default_vpc.default-vpc.id
