@@ -1,4 +1,4 @@
-resource "aws_instance" "CheckPointMC2" {
+resource "aws_instance" "CheckPoint" {
   ami                    = data.aws_ami.amiID.id
   instance_type          = "t2.micro"
   key_name               = "checkpoint-key"
@@ -7,4 +7,5 @@ resource "aws_instance" "CheckPointMC2" {
   tags = {
     Name = "CheckPointMC2"
   }
+  iam_instance_profile = aws_iam_instance_profile.ec2-s3-instance-profile.name
 }

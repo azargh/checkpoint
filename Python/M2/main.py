@@ -2,6 +2,7 @@ import argparse
 import boto3
 import json
 import time
+import os
 from datetime import datetime
 
 
@@ -18,13 +19,15 @@ def receive_and_upload_messages():
 
 
 def create_tmp_json_file(x: dict) -> str:
-    with open('tmp.json', 'w') as f:
+    home = os.path.expanduser('~')
+    full_path = os.path.join(home, 'tmp.json')
+    with open(full_path, 'w') as f:
         json.dump(x, f)
-    return 'tmp.json'
+    return full_path
 
 
 def upload_to_s3(path: str) -> None:
-    return s3.upload(path, "checkpoint-hw-2", str(datetime.now().timestamp()))
+    return s3.upload_file(path, "checkpoint-hw-2", str(datetime.now().timestamp()))
 
 
 if __name__ == '__main__':

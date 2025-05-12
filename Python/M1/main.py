@@ -8,6 +8,7 @@ sqsurl = sqs.get_queue_url(QueueName='CheckPointSQS')['QueueUrl']
 app = Flask(__name__)
 token = boto3.client('ssm').get_parameter(Name='token')['Parameter']['Value']
 
+
 def _update_token():
     response = boto3.client('ssm').get_parameter(Name='token')
     print(response['Parameter']['Value'])
