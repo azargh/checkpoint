@@ -5,7 +5,7 @@ resource "aws_instance" "CheckPoint" {
   vpc_security_group_ids = [aws_security_group.checkpoint-sg.id]
   availability_zone      = "us-east-1a"
   tags = {
-    Name = "CheckPointMC2"
+    Name = "CheckPoint"
   }
   iam_instance_profile = aws_iam_instance_profile.ec2-s3-instance-profile.name
 }
