@@ -57,3 +57,19 @@ resource "aws_vpc_security_group_ingress_rule" "allow_lb_http_ipv6" {
   ip_protocol       = "tcp"
   to_port           = 80
 }
+
+resource "aws_vpc_security_group_egress_rule" "allow_lb_http_ipv6_out" {
+  security_group_id = aws_security_group.checkpoint-lb-sg.id
+  cidr_ipv6         = "::/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_lb_http_ipv4_out" {
+  security_group_id = aws_security_group.checkpoint-lb-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}

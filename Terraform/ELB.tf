@@ -32,11 +32,13 @@ resource "aws_default_vpc" "default-vpc" {
 resource "aws_alb_target_group_attachment" "CheckPoint-target-group-attachment" {
   target_group_arn = aws_lb_target_group.CheckPoint-target-group.arn
   target_id = aws_instance.CheckPoint.id
+  port = 80
   depends_on = [aws_lb.CheckPoint-lb]
 }
 
 resource "aws_lb_listener" "CheckPoint-Listener" {
   load_balancer_arn = aws_lb.CheckPoint-lb.arn
+  protocol = "HTTP"
   port = "80"
   default_action {
     type = "forward"
