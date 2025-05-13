@@ -39,6 +39,7 @@ jobs:
           file: ./Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
   deploy:
+    name: Deploy to EC2
     needs: [build]
     runs-on: ubuntu-latest
     steps:
