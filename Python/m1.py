@@ -37,7 +37,13 @@ def eek():
 @app.route('/', methods=['POST'])
 def handle():
     json = request.get_json()
-    cond1 = _validate_timestamp(json['data']['email_timestream'])
+    cond1 = _validate_timestamp(json['data'])
     cond2 = _validate_token(json['token'])
     if cond1 and cond2:
         return _forward(json)
+    else:
+        return {'error': 'did not pass conditions'}
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
