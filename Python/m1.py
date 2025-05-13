@@ -42,9 +42,9 @@ def handle():
     if cond1 and cond2:
         forward = _forward(json)
         if forward['ResponseMetadata']['HTTPStatusCode'] == 200:
-            return {'message': 'conditions were met - content has been uploaded to the S3 bucket.'}
+            return {'message': 'conditions were met - content has been uploaded to the SQS.'}
         else:
-            return {'message': 'conditions were met - but encountered failure when uploading to the S3 bucket.'}
+            return {'message': 'conditions were met - but encountered failure when uploading to the SQS.'}
     else:
         return {'error': 'request did not pass the conditions - please provide a valid email_timestream and the correct token.'}
 
