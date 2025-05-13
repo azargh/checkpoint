@@ -32,9 +32,9 @@ jobs:
         uses: docker/setup-buildx-action@v3
       
       - name: Build and push Docker image
+        working-directory: ${{GITHUB_WORKSPACE}}/Python/
         uses: docker/build-push-action@v6
         with:
-          context: ./Python
           push: ${{ github.event_name != 'pull_request' }}
           file: ${{ github.workspace }}/Python/Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
