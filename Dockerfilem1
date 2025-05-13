@@ -1,0 +1,8 @@
+FROM python:3-alpine
+
+ADD requirements.txt /
+ADD m1.py /
+
+RUN pip install -r requirements.txt
+CMD ["python3", "m1.py"]
+EXPOSE 80
