@@ -30,8 +30,8 @@ def _forward(x: dict) -> None:
 
 
 @app.route('/')
-def eek():
-    return {'a': 'b'}
+def default():
+    return {'message': 'successfully received a GET request.'}
 
 
 @app.route('/', methods=['POST'])
@@ -42,7 +42,7 @@ def handle():
     if cond1 and cond2:
         return _forward(json)
     else:
-        return {'error': 'did not pass conditions'}
+        return {'error': 'request did not pass the conditions - please provide a valid email_timestream and the correct token.'}
 
 
 if __name__ == '__main__':
