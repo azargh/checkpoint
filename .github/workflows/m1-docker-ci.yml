@@ -34,7 +34,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./Python/
           push: ${{ github.event_name != 'pull_request' }}
           file: ./Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
