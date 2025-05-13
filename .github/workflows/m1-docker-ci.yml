@@ -12,6 +12,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,7 +40,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           file: ${{ github.workspace }}/Python/Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
-        working-directory: ${{ github.workspace }}
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
