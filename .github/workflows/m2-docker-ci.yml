@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,11 +24,38 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./Python
           push: ${{ github.event_name != 'pull_request' }}
-          file: ${{ github.workspace }}/Python/Dockerfilem2
+          file: ./Dockerfilem2
           tags: ${{ vars.DOCKER_USERNAME }}/m2:latest
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::781461006327:role/GitHubActionsRole
+          role-session-name: GitHub-Actions-Deploy
+
+      - uses: actions/checkout@v2
+      - name: Build & Deploy
+        env:
+            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            HOSTNAME: ${{secrets.EC2_DNS_NAME}}
+            USER_NAME: ${{secrets.REMOTE_USER}}
+
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+              # Now we have got the access of EC2 and we will start the deploy .
+              sudo docker stop m2
+              sudo docker rm m2
+              sudo docker run --name m2 -d azargh/m2:latest
+              '

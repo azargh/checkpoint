@@ -62,7 +62,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
               # Now we have got the access of EC2 and we will start the deploy .
-              sudo docker stop $(sudo docker ps -a -q)
-              sudo docker rm $(sudo docker ps -a -q)
-              sudo docker run -d -p 80:80 azargh/m1:latest
+              sudo docker stop m1
+              sudo docker rm m1
+              sudo docker run --name m1 -d -p 80:80 azargh/m1:latest
               '
