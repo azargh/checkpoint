@@ -16,6 +16,24 @@ resource "aws_iam_role" "S3Role" {
 EOF
 }
 
+resource "aws_iam_role" "GitHubActionsRole" {
+  name = "GitHubActionsRole"
+  assume_role_policy = <<EOF
+{
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Federated": "${aws_iam_openid_connect_provider.github_openid_connect_provider.arn}"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_iam_instance_profile" "ec2-s3-instance-profile" {
   name = "ec2-s3-instance-profile"
   role = aws_iam_role.S3Role.name

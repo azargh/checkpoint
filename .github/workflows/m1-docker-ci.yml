@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,3 +38,14 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           file: ${{ github.workspace }}/Python/Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: us-east-1
+          role-to-assume: GitHubActionsRole
+          role-session-name: GitHub Actions Deploy
+      - run: |
+          sudo docker run azargh/m1:latest
