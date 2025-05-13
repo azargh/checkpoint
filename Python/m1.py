@@ -41,7 +41,7 @@ def handle():
     cond2 = _validate_token(json['token'])
     if cond1 and cond2:
         forward = _forward(json)
-        if forward['ResponseMetadata']['HTTPStatusCode'] == 20:
+        if forward['ResponseMetadata']['HTTPStatusCode'] == 200:
             return {'message': 'conditions were met - content has been uploaded to the S3 bucket.'}
         else:
             return {'message': 'conditions were met - but encountered failure when uploading to the S3 bucket.'}
