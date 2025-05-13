@@ -22,12 +22,20 @@ resource "aws_iam_role" "GitHubActionsRole" {
 {
   "Statement": [
     {
-      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Action": "sts:AssumeRoleWithWebIdentity",
       "Principal": {
         "Federated": "${aws_iam_openid_connect_provider.github_openid_connect_provider.arn}"
       },
-      "Effect": "Allow",
-      "Sid": ""
+      "Sid": "",
+      "Condition": {
+        "StringEquals": {
+          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+          },
+        "StringLike": {
+          "token.actions.githubusercontent.com:sub": "repo:azargh/checkpoint:*"
+          }
+      }
     }
   ]
 }
