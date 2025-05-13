@@ -42,11 +42,15 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4.1.0
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::781461006327:role/GitHubActionsRole
-          role-session-name: GitHub-Actions-Deploy
-      - run: |
-          sudo docker run azargh/m1:latest
+      - name: Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOSTNAME: ${{secrets.EC2_DNS_NAME}}
+          USER_NAME: ${{secrets.REMOTE_USER}}
+        run: |
+                    echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+              # Now we have got the access of EC2 and we will start the deploy .
+              sudo docker run azargh/m1:latest
+              '
