@@ -40,7 +40,11 @@ def handle():
     cond1 = _validate_timestamp(json['data'])
     cond2 = _validate_token(json['token'])
     if cond1 and cond2:
-        return _forward(json)
+        forward = _forward(json)
+        if forward['ResponseMetadata']['HTTPStatusCode'] == 20:
+            return {'message': 'conditions were met - content has been uploaded to the S3 bucket.'}
+        else:
+            return {'message': 'conditions were met - but encountered failure when uploading to the S3 bucket.'}
     else:
         return {'error': 'request did not pass the conditions - please provide a valid email_timestream and the correct token.'}
 
