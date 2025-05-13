@@ -16,6 +16,8 @@ jobs:
       run:
         working-directory: ${{ github.workspace }}/Python/
     steps:
+      - name: pwd
+        run: pwd
       - name: Checkout
         uses: actions/checkout@v4
 
