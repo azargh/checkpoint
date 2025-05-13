@@ -33,4 +33,4 @@ jobs:
           context: ./Python
           push: ${{ github.event_name != 'pull_request' }}
           file: ${{ github.workspace }}/Python/Dockerfilem1
-          tags: user/app:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
