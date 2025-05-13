@@ -33,11 +33,11 @@ jobs:
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
-        working-directory: ${{ github.workspace }}/Python/
         with:
           push: ${{ github.event_name != 'pull_request' }}
           file: ${{ github.workspace }}/Python/Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
+        working-directory: ${{ github.workspace }}
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
