@@ -36,4 +36,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     while True:
         receive_and_upload_messages()
-        time.sleep(args.p)
+        time.sleep(args.poll_freq)
