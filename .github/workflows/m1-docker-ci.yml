@@ -45,7 +45,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
           aws-region: us-east-1
-          role-to-assume: GitHubActionsRole
+          role-to-assume: arn:aws:iam::781461006327:role/GitHubActionsRole
           role-session-name: GitHub Actions Deploy
       - run: |
           sudo docker run azargh/m1:latest
