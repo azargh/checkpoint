@@ -32,3 +32,4 @@ jobs:
         with:
           push: ${{ github.event_name != 'pull_request' }}
           file: dockerm1
+          tags: latest
