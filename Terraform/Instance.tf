@@ -14,3 +14,8 @@ resource "aws_instance" "CheckPoint" {
   sudo sh get-docker.sh
   EOF
 }
+
+resource local_file "ec2-dns-name" {
+  content = aws_instance.CheckPoint.public_dns
+  filename = "ec2-dns-name.txt"
+}
