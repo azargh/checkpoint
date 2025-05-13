@@ -39,6 +39,7 @@ jobs:
           file: ${{ github.workspace }}/Python/Dockerfilem1
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
   deploy:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: configure AWS credentials
@@ -46,6 +47,6 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::781461006327:role/GitHubActionsRole
-          role-session-name: GitHub Actions Deploy
+          role-session-name: GitHub-Actions-Deploy
       - run: |
           sudo docker run azargh/m1:latest
