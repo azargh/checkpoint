@@ -40,16 +40,17 @@ jobs:
           tags: ${{ vars.DOCKER_USERNAME }}/m1:latest
   deploy:
     name: Deploy to EC2
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
+      - uses: actions/checkout@v2
+      - name: Build & Deploy
         env:
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          HOSTNAME: ${{secrets.EC2_DNS_NAME}}
-          USER_NAME: ${{secrets.REMOTE_USER}}
+            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            HOSTNAME: ${{secrets.EC2_DNS_NAME}}
+            USER_NAME: ${{secrets.REMOTE_USER}}
+
         run: |
-                    echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
               # Now we have got the access of EC2 and we will start the deploy .
