@@ -1,3 +1,5 @@
+# finds the AMI to use for the instance
+
 data "aws_ami" "amiID" {
   most_recent = true
 
