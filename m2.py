@@ -9,13 +9,19 @@ from datetime import datetime
 sqs = boto3.client('sqs', region_name='us-east-1')
 sqsurl = sqs.get_queue_url(QueueName='CheckPointSQS')['QueueUrl']
 s3 = boto3.client('s3', region_name='us-east-1')
+handled_ids = set()
 
 
 def receive_and_upload_messages():
     response = sqs.receive_message(QueueUrl=sqsurl)
-    for message in response['Messages']:
-        path = create_tmp_json_file(message)
-        upload_to_s3(path)
+    if 'Messages' in response:
+        for message in response['Messages']:
+            id = message['MessageId']
+            if id in handled_ids:
+                continue
+            path = create_tmp_json_file(message['Body'])
+            upload_to_s3(path)
+            handled_ids.add(id)
 
 
 def create_tmp_json_file(x: dict) -> str:
@@ -27,7 +33,9 @@ def create_tmp_json_file(x: dict) -> str:
 
 
 def upload_to_s3(path: str) -> None:
-    return s3.upload_file(path, "checkpoint-hw-2", str(datetime.now().timestamp()))
+    suffix = '.json'
+    timestamp = str(datetime.now().timestamp())
+    return s3.upload_file(path, "checkpoint-hw-2", timestamp + suffix)
 
 
 if __name__ == '__main__':

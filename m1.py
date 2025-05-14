@@ -26,7 +26,7 @@ def _validate_token(x: str) -> bool:
 
 
 def _forward(x: dict) -> None:
-    return sqs.send_message(QueueUrl=sqsurl, DelaySeconds=10, MessageBody='hello')
+    return sqs.send_message(QueueUrl=sqsurl, DelaySeconds=10, MessageBody=str(x))
 
 
 @app.route('/')
@@ -40,7 +40,7 @@ def handle():
     cond1 = _validate_timestamp(json['data'])
     cond2 = _validate_token(json['token'])
     if cond1 and cond2:
-        forward = _forward(json)
+        forward = _forward(json['data'])
         if forward['ResponseMetadata']['HTTPStatusCode'] == 200:
             return {'message': 'conditions were met - content has been uploaded to the SQS.'}
         else:

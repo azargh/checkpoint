@@ -57,5 +57,5 @@ jobs:
               # Now we have got the access of EC2 and we will start the deploy .
               sudo docker stop m2
               sudo docker rm m2
-              sudo docker run --name m2 -d azargh/m2:latest
+              sudo docker run --name m2 -d ${{ vars.DOCKER_USERNAME }}/m2:latest
               '
