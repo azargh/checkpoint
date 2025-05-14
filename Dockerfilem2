@@ -5,4 +5,6 @@ ADD m2.py /
 
 RUN pip install -r requirements.txt
 CMD ["python3", "m2.py"]
-EXPOSE 80
+
+# fairly simple docker file, we grab a python container and add in our script and requirements
+# we run pip install to add the requirements to the image and run it with our CMD

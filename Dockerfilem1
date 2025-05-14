@@ -6,3 +6,7 @@ ADD m1.py /
 RUN pip install -r requirements.txt
 CMD ["python3", "m1.py"]
 EXPOSE 80
+
+# fairly simple docker file, we grab a python container and add in our script and requirements
+# we run pip install to add the requirements to the image and run it with our CMD
+# we expose port 80 in the container so that we can map ports 80:80 from ec2 instance to the image running inside it

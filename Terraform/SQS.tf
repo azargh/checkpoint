@@ -1,3 +1,4 @@
+# creates a SQS
 resource "aws_sqs_queue" "CheckPointSQS" {
   name                      = "CheckPointSQS"
   delay_seconds             = 90
