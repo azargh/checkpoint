@@ -27,9 +27,9 @@ The contents of the repository are as follows:
 Installation guide
 ############
 
-1. Clone the repository's files and upload them to a brand new repository under your control.
-    1.1 This can be done multiple ways: setting up an empty repository under your user, then downloading and adding the files found in my (azargh/checkpoint) main branch
-    1.2 The reason we need this is for the user to control the Github secrets. We need that to set up the CI/CD process.
+1. Create an empty repository in github under your control.
+    1.1  Download this (azargh/checkpoint) repository's files. We will upload them to a repository that you created in the end.
+         The reason we need to do this is for the user to control the Github secrets, which we need to set up the CI/CD process.
 2. Open Git Bash and type in 'ssh-keygen', give the key a name and generate it wherever you want.
 3. Navigate to ./Terraform/Keypair.tf and replace the public key with the public key of the key you generated in step 2.
     3.1 Navigate to ./Terraform/Token.tf and replace the token with your desired secret, and remove the file (or make git not track it) so you don't upload it when pushing code or making changes.
@@ -50,17 +50,29 @@ Installation guide
         5.3.2 EC2_DNS_NAME = [the contents of the file "ec2-dns-name.txt" generated in step 4 and talked about in step 4.1]
         5.3.3 REMOTE_USER = [the name of the user on the EC2 instance we created in step 4. Since we're using an Ubuntu AMI, this will be 'ubuntu' by default and is what you should insert here. However, if you were to change it or change AMI in the terraform files, this would have to match the remote user.]
         5.3.4 SSH_PRIVATE_KEY = [the contents of the private key we generated in step 2.]
+6. Commit the files to the remote repository that you created in step 1.
+   There's two github actions that are configured so that on push, they will perform the two CI/CD procedures explained below.
 
-That's it. The installation should now be complete.
+That's it. The installation should now be complete, once the github action finish, the microservices will be running.
+
+To test, once both github actions have completed successfully, send a POST request to the LB's DNS name (you can get it from the file generated in installation step 4.2).
+An example of such a request:
+"curl -H "Content-Type: application/json" --request POST --data '{"data": {"email_timestream": "1693561101", "subject": "happy birthday"}, "token": "FAKETOKEN"}' CheckPoint-lb-123456789.us-east-1.elb.amazonaws.com"
+Provide the correct token or your data will not continue on in our SQS->S3 pipeline.
+Verify that you have received an appropriate message back, and check to see if a new file has appeared in your S3 bucket if you provided the right token.
+
+If everything went well, congratulations!
+Continue on to the CI/CD explanation to see how changes to your m1 and m2 microservices will be CI'd and then CD'd.
+You can now edit the microservices (the .py files) and push your changes. The github actions configured will
+deploy your code live.
 
 ############
-Usage
+CI/CD explanation
 ############
 
 The cloud infrastructure has been created by Terraform and the Github repository has been set up.
 There's 2 actions that will also be automatically set up, and they are found ./.github/workflows.
 Both of them will be activated when a push is done to the main branch.
-Add a comment to one of the files and push the change, or alternatively, manually run the 2 actions.
 
 Each one of these actions will perform a CI/CD process:
 CI:
@@ -72,12 +84,8 @@ CD:
     3. They will attempt to remove the older image (if it exists and is running)
     4. They will launch the microservice.
 
-After these 2 actions are complete (at least once), our entire infrastructure will be done.
+This is the reason that in step 6 we commit our files to the remote repository at the end after all other
 
-To test, send a POST request to the LB's DNS name (you can get it from the file generated in installation step 4.2).
-An example of such a request:
-"curl -H "Content-Type: application/json" --request POST --data '{"data": {"email_timestream": "1693561101", "subject": "happy birthday"}, "token": "FAKETOKEN"}' CheckPoint-lb-123456789.us-east-1.elb.amazonaws.com"
-Be sure to provide the correct token or your data will not continue on in our SQS->S3 pipeline.
 
 ############
 Additional notes
@@ -96,4 +104,6 @@ This segment will outline things I think COULD be done better, that I was not ab
 
 3. In a similar vein, the instance is ssh'able from anywhere (but only the person who is using this codebase has the private key since it's part of the installation steps)
    This ties to point (1) made above.
+
+4. I was not able to do the bonuses in time. :(
 
